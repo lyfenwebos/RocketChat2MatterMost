@@ -21,23 +21,23 @@ namespace RocketChat2MatterMost
 
             dynamic versionRoot = new JObject();
             versionRoot.type = "version";
-
-            var rchome = "<Link to RocketChat>";
             versionRoot.version = 1;
-            var dir = "<Output Directory for Application>";
-            var mmdir = "<Directory where attachments and jsonl will be put on MatterMost Server>";
-            var file = dir + "full.jsonl";
+           
+            var rchome = "<Link to RocketChat>";
+            var outputdir = "<Output Directory for Application>";
+            var importdir = "<Directory where attachments and jsonl will be put on MatterMost Server>";
+            var importjsonl = outputdir + "data.jsonl";
             var teamname = "<TeamName in MatterMost>";
             var channelname = "<ChannelName in Team above>";
             var rcuid = "<rc_uid cookie from the browser after successful log in>";
             var rctoken = "<rc_token cookie from the browser after successful log in>";
 
-            if (Directory.Exists(dir))
+            if (Directory.Exists(outputdir))
             {
-                Directory.Delete(dir, true);
+                Directory.Delete(outputdir, true);
             }
-            Directory.CreateDirectory(dir);
-            File.WriteAllText(file, versionRoot.ToString(Formatting.None)+Environment.NewLine);
+            Directory.CreateDirectory(outputdir);
+            File.WriteAllText(importjsonl, versionRoot.ToString(Formatting.None)+Environment.NewLine);
 
             for (int j = postMax; j >= 0; j--)
             {
@@ -328,10 +328,10 @@ namespace RocketChat2MatterMost
                                     filename = filename.Replace(c, '_').Replace(" ", "");
                                 }
 
-                                client.DownloadFile(link, dir+filename);
+                                client.DownloadFile(link, outputdir+filename);
                                 var attachmentsObject = JObject.FromObject(new
                                 {
-                                    path = mmdir + filename
+                                    path = importdir + filename
                                 });
                                 var attachmentsProp = JObject.FromObject(new
                                 {
@@ -351,11 +351,11 @@ namespace RocketChat2MatterMost
                     {
                         if (j > 2)
                         {
-                            File.AppendAllText(file, postRoot.ToString(Formatting.None) + Environment.NewLine);
+                            File.AppendAllText(importjsonl, postRoot.ToString(Formatting.None) + Environment.NewLine);
                         }
                         else
                         {
-                            File.AppendAllText(file, postRoot.ToString(Formatting.None));
+                            File.AppendAllText(importjsonl, postRoot.ToString(Formatting.None));
                         }
                         Console.Write("\rDoing Message {0} out of {1}", postMax - j + 1, postMax + 1);
                     }
