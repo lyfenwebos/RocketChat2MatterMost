@@ -1,6 +1,7 @@
 # RocketChat to MatterMost Import
 
 **Notice**: RocketChat has Channel and Group, but their difference is in privacy, I'll be referencing them both as a "Channel"
+**Notice**: You are doing this at your own risk. I am not responsible for any consequences.
 
 ## Intro
 This Program helps you migrate chat history from Rocket Chat by creating JSONL file for Mattermost.
