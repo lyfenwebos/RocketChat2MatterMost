@@ -1,37 +1,61 @@
-## Welcome to GitHub Pages
+# RocketChat to MatterMost Import
 
-You can use the [editor on GitHub](https://github.com/lyfenwebos/RocketChat2Mattermost/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+## Intro
+This Program helps you migrate chat history from Rocket Chat by creating JSONL file for Mattermost.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+## Requirements
+For Program to work you need:
+- Set variables accordingly to your setup (explained below);
+- Be member of the Channel in RocketChat;
+- Have Personal Access Token in RocketChat;
+- Know how to make API requests;
 
-### Markdown
+### How does Program work
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+Program reads JSON file with RocketChat Channel's history, gets mandatory keys' values and creates [correct JSONL file](https://docs.mattermost.com/deployment/bulk-loading.html#post-object) for MatterMost.
 
-```markdown
-Syntax highlighted code block
+After Import to MatterMost you will have:
+- Full chat history;
+- All replies are in correct places;
+- Messages' timestamps are moved;
+- Attachments(Files(any),  Images (jpeg/png)) are moved;
+- Reactions(not all, you can add) are moved;
+- Links in messages are moved;
 
-# Header 1
-## Header 2
-### Header 3
+## Getting RocketChat Channel's History through API
+**Notice:** I used Postman WebUI with Postman Agent.
+[RocketChat API Documentation 1](https://docs.rocket.chat/api/rest-api/methods/channels/history)
+[RocketChat API Documentation 2](https://docs.rocket.chat/api/rest-api/methods/groups/history)
 
-- Bulleted
-- List
+### Getting UserID
+- Open Postman, create workspace and start a new request;
+- Create POST Request with link `https://example.com/api/v1/login`, where example.com - RocketChat landing page;
+- Set Body to Raw - JSON;
+- Put JSON, Send.
+`
+{
+    "user": "username",
+    "password": "password",
+    "code": "include this key if you have 2FA enabled in RocketChat with code from your Authenticator App"
+}
+`
+- Find userId in response and write it down
 
-1. Numbered
-2. List
+### Getting GroupID
+/api/v1/groups.list
 
-**Bold** and _Italic_ and `Code` text
+### Getting chat history from RocketChat Channel
+- Change Request type to GET;
+- Set link `https://example.com/api/v1/groups.history`, where example.com - RocketChat landing page;
+- Set Headers:
+1. X-Auth-Token - Personal Access Token
+2. X-User-Id - userId
+- Set Parameters:
+1. roomId - 
+2. inclusive - true
 
-[Link](url) and ![Image](src)
-```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
 
-### Jekyll Themes
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/lyfenwebos/RocketChat2Mattermost/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+## Preparing Variables
+- RCJSON - Path to 
