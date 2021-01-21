@@ -77,6 +77,9 @@ Channel - a public channel;
 - Press F12> Application> Cookies> RocketChat URL;
 - Write down rc_uid and rc_token;
 
+### Getting the source code
+You can get source code from [Releases](https://github.com/lyfenwebos/RocketChat2Mattermost/releases/tag/1.0)  
+
 ### Preparing Variables
 - RCJSON - Path to a response file in JSON with Channel's history;
 - rchome - Rocket chat landing page (e.g. `https://example.com`);
