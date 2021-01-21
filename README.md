@@ -93,9 +93,11 @@ After you finish with variables, Run Programm
 - Copy ***all contents*** of **outputdir** in a directory you mentioned in **importdir**
 - Go to root directory of mattermost (default `/opt/mattermost`)
 **Notice**: Personally suggesting to disable Bleeve(System Console>Experimental>Bleeve>false), stop MatterMost, do config backup (`cp /opt/mattermost/config/config.json /opt/mattermost/config/config.json.bck`) and do server backup.
-- Run validation command `sudo -u mattermost bin/mattermost import bulk /path/to/data.jsonl --validate`  
+- Run validation command  
+`sudo -u mattermost bin/mattermost import bulk /path/to/data.jsonl --validate`  
 If successful, then you can apply it
-- `sudo -u mattermost bin/mattermost import bulk /path/to/data.jsonl --apply`  
+- Run apply command  
+`sudo -u mattermost bin/mattermost import bulk /path/to/data.jsonl --apply`  
 If no errors reported, start MatterMost, Go to System Console > Web Server > Purge All Caches, restart application.  
 - Check Channel history.
 
