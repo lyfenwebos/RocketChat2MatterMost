@@ -1,6 +1,6 @@
 # RocketChat to MatterMost Import
 
-**Notice**: RocketChat has Channel and Group, but their difference is in privacy, I'll be referencing them both as a "Channel"
+**Notice**: RocketChat has Channel and Group, but their difference is in privacy, I'll be referencing them both as a "Channel"  
 **Notice**: You are doing this at your own risk. I am not responsible for any consequences.
 
 ## Intro
@@ -29,15 +29,15 @@ After Import to MatterMost you will have:
 
 ## Migrating RocketChat Channel's History to MatterMost Channel
 #### Useful Links
-1. [MatterMost Bulk Import Documentation](https://docs.mattermost.com/deployment/bulk-loading.html)
-2. [RocketChat API Documentation: Authentication](https://docs.rocket.chat/api/rest-api/methods/authentication/login)
-3. [RocketChat API Documentation: Groups List](https://docs.rocket.chat/api/rest-api/methods/groups/list)
-4. [RocketChat API Documentation: Channels History](https://docs.rocket.chat/api/rest-api/methods/channels/history)
-5. [RocketChat API Documentation: Groups History](https://docs.rocket.chat/api/rest-api/methods/groups/history)
+[MatterMost Bulk Import Documentation](https://docs.mattermost.com/deployment/bulk-loading.html)  
+[RocketChat API Documentation: Authentication](https://docs.rocket.chat/api/rest-api/methods/authentication/login)  
+[RocketChat API Documentation: Groups List](https://docs.rocket.chat/api/rest-api/methods/groups/list)  
+[RocketChat API Documentation: Channels History](https://docs.rocket.chat/api/rest-api/methods/channels/history)  
+[RocketChat API Documentation: Groups History](https://docs.rocket.chat/api/rest-api/methods/groups/history)  
 
 #### Definitions in terms of RocketChat
-- Group - a private group;
-- Channel - a public channel;
+Group - a private group;  
+Channel - a public channel;
 
 **Notice:** I used Postman WebUI with Postman Agent.
 ### Getting UserID
@@ -85,17 +85,19 @@ After Import to MatterMost you will have:
 - teamname - Team name in MatterMost where channel is located;
 - channelname - Channel name in which history will be imported;
 - rcuid - rc_uid Cookie;
-- rctoken - rc_token Cookie;
-- After you finish with variables, Run Programm
+- rctoken - rc_token Cookie;  
+
+After you finish with variables, Run Programm
 
 ### Importing Chat History into MatterMost Channel
 - Copy ***all contents*** of **outputdir** in a directory you mentioned in **importdir**
 - Go to root directory of mattermost (default `/opt/mattermost`)
 **Notice**: Personally suggesting to disable Bleeve(System Console>Experimental>Bleeve>false), stop MatterMost, do config backup (`cp /opt/mattermost/config/config.json /opt/mattermost/config/config.json.bck`) and do server backup.
-- Run validation command `sudo -u mattermost bin/mattermost import bulk /path/to/data.jsonl --validate`
-- If successful, then you can apply it
-- `sudo -u mattermost bin/mattermost import bulk /path/to/data.jsonl --apply`
-- If no errors reported
+- Run validation command `sudo -u mattermost bin/mattermost import bulk /path/to/data.jsonl --validate`  
+If successful, then you can apply it
+- `sudo -u mattermost bin/mattermost import bulk /path/to/data.jsonl --apply`  
+If no errors reported, start MatterMost, Go to System Console > Web Server > Purge All Caches, restart application.  
+- Check Channel history.
 
 ## TODO
 - Change the way reactions are selected. Needs something better.
