@@ -24,12 +24,12 @@ namespace RocketChat2MatterMost
             var rchome = "<Link to RocketChat>";
             var outputdir = "<Output Directory for Application>";
             var importdir = "<Directory where attachments and jsonl will be put on MatterMost Server>";
-            var importjsonl = outputdir + "data.jsonl";
             var teamname = "<TeamName in MatterMost>";
             var channelname = "<ChannelName in Team above>";
             var rcuid = "<rc_uid cookie from the browser after successful log in>";
             var rctoken = "<rc_token cookie from the browser after successful log in>";
             var postMax = ((JArray)RCJSON["messages"]).Count - 1;
+            var importjsonl = outputdir + "data.jsonl";
 
             if (Directory.Exists(outputdir))
             {
