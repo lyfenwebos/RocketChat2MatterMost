@@ -14,15 +14,13 @@ namespace RocketChat2MatterMost
         public static JArray reactionsArray = new JArray();
         static void Main(string[] args)
         {
-            var RCJSON = JObject.Parse(File.ReadAllText("<Full Path to RocketChat JSON>"));
-            var postMax = ((JArray)RCJSON["messages"]).Count - 1;
             int replyCurr;
             string postID;
-
             dynamic versionRoot = new JObject();
             versionRoot.type = "version";
             versionRoot.version = 1;
-           
+            
+            var RCJSON = JObject.Parse(File.ReadAllText("<Full Path to RocketChat JSON>"));
             var rchome = "<Link to RocketChat>";
             var outputdir = "<Output Directory for Application>";
             var importdir = "<Directory where attachments and jsonl will be put on MatterMost Server>";
@@ -31,6 +29,7 @@ namespace RocketChat2MatterMost
             var channelname = "<ChannelName in Team above>";
             var rcuid = "<rc_uid cookie from the browser after successful log in>";
             var rctoken = "<rc_token cookie from the browser after successful log in>";
+            var postMax = ((JArray)RCJSON["messages"]).Count - 1;
 
             if (Directory.Exists(outputdir))
             {
